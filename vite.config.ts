@@ -1,12 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), basicSsl()],
+  resolve: {
+    alias: {
+      '@three': resolve(__dirname, 'node_modules/three'),
+    },
+  },
   server: {
-    https: true,
-    host: '127.0.0.1',
+    https: {
+      key: '',
+    },
+    host: '0.0.0.0',
   },
 });
