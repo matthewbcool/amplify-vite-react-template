@@ -1,10 +1,25 @@
 declare module 'Gameboy' {
-  const Gameboy: any;
+  import { Group } from 'three';
+  import { ReactNode } from 'react';
+
+  interface GameboyProps {
+    children?: ReactNode;
+  }
+
+  const Gameboy: (props: GameboyProps) => JSX.Element;
 
   export default Gameboy;
 }
+
 declare module 'three/examples/jsm/loaders/GLTFLoader' {
-  import { Loader, LoadingManager, Group } from 'three';
+  import {
+    Loader,
+    LoadingManager,
+    Group,
+    AnimationClip,
+    Material,
+    Object3D,
+  } from 'three';
   import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
   import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
@@ -23,8 +38,10 @@ declare module 'three/examples/jsm/loaders/GLTFLoader' {
   export interface GLTF {
     scene: Group;
     scenes: Group[];
-    animations: any[];
+    animations: AnimationClip[];
     asset: any;
+    nodes: Record<string, Object3D>;
+    materials: Record<string, Material>;
   }
 }
 
