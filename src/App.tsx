@@ -1,10 +1,19 @@
-import { Test } from './Test';
+import { Gameboy } from './Gameboy';
+import { Canvas } from '@react-three/fiber';
+import { XR, createXRStore } from '@react-three/xr';
+
+const store = createXRStore();
 
 function App() {
   return (
-    <main>
-      <Test />
-    </main>
+    <>
+      <button onClick={() => store.enterAR()}>Enter AR</button>
+      <Canvas>
+        <XR store={store}>
+          <Gameboy />
+        </XR>
+      </Canvas>
+    </>
   );
 }
 
