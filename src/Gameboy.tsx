@@ -29,14 +29,12 @@ function Gameboy(props: GameboyProps) {
   GLTFLoader.prototype.setKTX2Loader.call(gltfLoader, ktx2Loader);
   GLTFLoader.prototype.setDRACOLoader.call(gltfLoader, dracoLoader);
 
-  const { nodes, materials, animations } = useLoader<GLTF>(
-    GLTFLoader,
-    '/gameboy.glb',
-    (loader: GLTFLoader) => {
-      loader.setKTX2Loader(ktx2Loader);
-      loader.setDRACOLoader(dracoLoader);
-    }
-  );
+  const gltf = useLoader(GLTFLoader, '/gameboy.glb', (loader: GLTFLoader) => {
+    loader.setKTX2Loader(ktx2Loader);
+    loader.setDRACOLoader(dracoLoader);
+  }) as unknown as GLTF;
+
+  const { nodes, materials, animations } = gltf;
 
   useAnimations(animations, group);
 
